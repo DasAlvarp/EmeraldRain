@@ -12,13 +12,16 @@ func _ready():
 	var bButtons = [0, 5]
 	var cButtons = [3, 5]
 	var dButtons = [1]
+	#initialize controllers. They will do things
 	reader = InputReader.InputReader.new(0, aButtons, bButtons, cButtons, dButtons, 15, false)
 	reader2 = InputReader.InputReader.new(1, aButtons, bButtons, cButtons, dButtons, 15, true)
 	set_process(true)
 
 
 func _process(delta):
+	#check controllers
 	reader.updateBuffer()
 	reader2.updateBuffer()
+	#display output
 	get_node("Control/P1Input").set_text(reader.getDisplayBuffer())
 	get_node("Control/P2Input").set_text(reader2.getDisplayBuffer())
