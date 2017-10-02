@@ -78,6 +78,7 @@ class InputReader:
 			displayMe = displayMe + "\n"
 		return displayMe
 
+
 	func getButtonLetter(letter, pressiness):
 		if(pressiness < 1):
 			return ""
@@ -85,6 +86,7 @@ class InputReader:
 			return letter
 		else:
 			return letter.to_upper()
+
 
 	func getDirectional(positiveID, negativeID):
 		var dirNum = 0

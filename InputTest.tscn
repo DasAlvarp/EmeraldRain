@@ -30,7 +30,22 @@ margin/top = 14.0
 margin/right = 685.0
 margin/bottom = 473.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_color_shadow = Color( 1, 1, 1, 1 )
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="P2Input" type="Label" parent="Control"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 855.0
+margin/top = 14.0
+margin/right = 983.0
+margin/bottom = 473.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+align = 2
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
