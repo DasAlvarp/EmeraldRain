@@ -70,9 +70,21 @@ class InputReader:
 	func getDisplayBuffer():
 		var displayMe = ""
 		for x in range(hBuffer.size()):
-			displayMe = displayMe + str(getDirNum(hBuffer[x], vBuffer[x])) + "\n"
+			displayMe = displayMe + str(getDirNum(hBuffer[x], vBuffer[x]))
+			displayMe = displayMe + getButtonLetter("a", aPressedBuffer[x])
+			displayMe = displayMe + getButtonLetter("b", bPressedBuffer[x])
+			displayMe = displayMe + getButtonLetter("c", cPressedBuffer[x])
+			displayMe = displayMe + getButtonLetter("d", dPressedBuffer[x])
+			displayMe = displayMe + "\n"
 		return displayMe
 
+	func getButtonLetter(letter, pressiness):
+		if(pressiness < 1):
+			return ""
+		elif(pressiness == 1):
+			return letter
+		else:
+			return letter.to_upper()
 
 	func getDirectional(positiveID, negativeID):
 		var dirNum = 0
