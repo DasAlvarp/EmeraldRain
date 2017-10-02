@@ -6,19 +6,19 @@ class InputReader:
 	var cList
 	var dList
 	
-	var buffSize
-	
 	#horizontal and vertical dir buffers
 	var hBuffer
 	var vBuffer
 	
-	#a buffers. Held = 1. Pressed = 2, nothing = 0, released = -1 
+	#button buffers. Held = 1. Pressed = 2, nothing = 0, released = -1 
 	var aPressedBuffer
 	var bPressedBuffer
 	var cPressedBuffer
 	var dPressedBuffer
 
+	#if character is facing left, then flipped is true
 	var flipped
+
 
 	func _init(deviceNum, aList, bList, cList, dList, bufferLen, flipped):
 		self.deviceNum = deviceNum
@@ -36,6 +36,7 @@ class InputReader:
 		self.hBuffer = []
 		self.vBuffer = []
 		
+		#fill up the buffers with nothing.
 		for x in range(bufferLen):
 			self.aPressedBuffer.append(0)
 			self.bPressedBuffer.append(0)
@@ -50,7 +51,7 @@ class InputReader:
 		return (horizontal + 2) + (vertical + 1) * 3
 
 
-	#updates this guy.
+	#updates this guy. Should be called every frame for good input reading.
 	func updateBuffer():
 		#first, we take everything off the end of the buffer
 		for x in range(hBuffer.size() - 1):
@@ -60,13 +61,14 @@ class InputReader:
 			dPressedBuffer[x] = dPressedBuffer[x+1]
 			hBuffer[x] = hBuffer[x+1]
 			vBuffer[x] = vBuffer[x+1]
-			
+		
+		#now we add the current states to the end
 		hBuffer[-1] = getDirectional(15, 14)#15 is right, 14 is left
 		vBuffer[-1] = getDirectional(12, 13)#12 is up, 13 is down
-		aPressedBuffer[-1] = getVirtualButton(1, aPressedBuffer[-2])
-		bPressedBuffer[-1] = getVirtualButton(2, bPressedBuffer[-2])
-		cPressedBuffer[-1] = getVirtualButton(3, cPressedBuffer[-2])
-		dPressedBuffer[-1] = getVirtualButton(4, dPressedBuffer[-2])
+		aPressedBuffer[-1] = getVirtualButton(aList, aPressedBuffer[-2])
+		bPressedBuffer[-1] = getVirtualButton(bList, bPressedBuffer[-2])
+		cPressedBuffer[-1] = getVirtualButton(cList, cPressedBuffer[-2])
+		dPressedBuffer[-1] = getVirtualButton(dList, dPressedBuffer[-2])
 
 
 	#flips the horizontal buffer. Only affects horizontal, and only the final houtput. Everything else is stored seperately.
@@ -91,6 +93,7 @@ class InputReader:
 		return displayMe
 
 
+	#for display in training mode. Should be good for now, maybe some fancier stuff at some point in the future.
 	func getButtonLetter(letter, pressiness):
 		if(pressiness < 1):
 			return ""
@@ -109,20 +112,7 @@ class InputReader:
 		return dirNum
 
 
-	func getVirtualButton(buttonArrNum, prevState):
-		#this determines which button list to iterate through
-		var buttonList
-		if(buttonArrNum == 1):
-			buttonList = aList
-		elif(buttonArrNum == 2):
-			buttonList = bList
-		elif(buttonArrNum == 3):
-			buttonList = cList
-		elif(buttonArrNum == 4):
-			buttonList = dList
-		else:
-			return 0
-		
+	func getVirtualButton(buttonList, prevState):
 		var isDown = getVirtualButtonDown(buttonList)
 		if(prevState < 1):
 			if(isDown):
