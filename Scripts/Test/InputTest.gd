@@ -3,7 +3,7 @@ extends Node2D
 # class member variables go here, for example:
 # var a = 2
 # var b = "textvar"
-var InputReader = load("res://Scripts/Implemented/Universal/InputReader.gd")
+var InputReader = load("./InputReader.gd")
 
 var reader
 var reader2
