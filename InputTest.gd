@@ -14,8 +14,8 @@ func _ready():
 	var bButtons = [0, 5]
 	var cButtons = [3, 5]
 	var dButtons = [1]
-	reader = InputReader.InputReader.new(0, aButtons, bButtons, cButtons, dButtons, 15)
-	reader2 = InputReader.InputReader.new(1, aButtons, bButtons, cButtons, dButtons, 15)
+	reader = InputReader.InputReader.new(0, aButtons, bButtons, cButtons, dButtons, 15, false)
+	reader2 = InputReader.InputReader.new(1, aButtons, bButtons, cButtons, dButtons, 15, true)
 	# Called every time the node is added to the scene.
 	# Initialization here
 

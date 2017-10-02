@@ -18,13 +18,16 @@ class InputReader:
 	var cPressedBuffer
 	var dPressedBuffer
 
+	var flipped
 
-	func _init(deviceNum, aList, bList, cList, dList, bufferLen):
+	func _init(deviceNum, aList, bList, cList, dList, bufferLen, flipped):
 		self.deviceNum = deviceNum
 		self.aList = aList
 		self.bList = bList
 		self.cList = cList
 		self.dList = dList
+		
+		self.flipped = flipped
 		
 		self.aPressedBuffer = []
 		self.bPressedBuffer = []
@@ -66,11 +69,20 @@ class InputReader:
 		dPressedBuffer[-1] = getVirtualButton(4, dPressedBuffer[-2])
 
 
+	#flips the horizontal buffer. Only affects horizontal, and only the final houtput. Everything else is stored seperately.
+	func flip():
+		flipped = !flipped
+		return flipped
+
+
 	#returns a string of the buttons pressed.
 	func getDisplayBuffer():
 		var displayMe = ""
 		for x in range(hBuffer.size()):
-			displayMe = displayMe + str(getDirNum(hBuffer[x], vBuffer[x]))
+			if(flipped):
+				displayMe = displayMe + str(getDirNum(hBuffer[x] * -1, vBuffer[x]))
+			else:
+				displayMe = displayMe + str(getDirNum(hBuffer[x], vBuffer[x]))
 			displayMe = displayMe + getButtonLetter("a", aPressedBuffer[x])
 			displayMe = displayMe + getButtonLetter("b", bPressedBuffer[x])
 			displayMe = displayMe + getButtonLetter("c", cPressedBuffer[x])
