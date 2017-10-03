@@ -9,10 +9,22 @@ class CSVreader:
 		self.file = File.new()
 		file.open(path, file.READ)
 		self.headers = file.get_csv_line(",")
+		self.dictionary = []
+		while(!file.eof_reached()):
+			self.dictionary.append(file.get_csv_line(","))
 
 
-	func getColumns():
+	func printColumns():
 		var cols = ""
 		for header in headers:
 			cols = cols + header + ", "
 		return cols
+
+
+	func printRows():
+		var rows = ""
+		for entry in dictionary:
+			for point in entry:
+				rows = rows + point + ", "
+			rows = rows + "\n"
+		return rows
