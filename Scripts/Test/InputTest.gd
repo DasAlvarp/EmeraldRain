@@ -1,9 +1,11 @@
 extends Node2D
 
 var InputReader = load("res://Scripts/Implemented/Universal/InputReader.gd")
+var CSVreader = load("res://Scripts/Implemented/Universal/CSVreader.gd")
 
 var reader
 var reader2
+var csv
 
 
 func _ready():
@@ -13,6 +15,7 @@ func _ready():
 	var cButtons = [3, 5]
 	var dButtons = [1]
 	#initialize controllers. They will do things
+	csv = CSVreader.CSVreader.new("res://Assets/Test/TestCols.csv")
 	reader = InputReader.InputReader.new(0, aButtons, bButtons, cButtons, dButtons, 15, false)
 	reader2 = InputReader.InputReader.new(1, aButtons, bButtons, cButtons, dButtons, 15, true)
 	set_process(true)
@@ -23,5 +26,6 @@ func _process(delta):
 	reader.updateBuffer()
 	reader2.updateBuffer()
 	#display output
+	get_node("Control/CSV").set_text(csv.getColumns())
 	get_node("Control/P1Input").set_text(reader.getDisplayBuffer())
 	get_node("Control/P2Input").set_text(reader2.getDisplayBuffer())
