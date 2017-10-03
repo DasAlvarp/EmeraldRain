@@ -26,6 +26,6 @@ func _process(delta):
 	reader.updateBuffer()
 	reader2.updateBuffer()
 	#display output
-	get_node("Control/CSV").set_text(csv.printRows())
+	get_node("Control/CSV").set_text(csv.getEntry("Fweh", 7))
 	get_node("Control/P1Input").set_text(reader.getDisplayBuffer())
 	get_node("Control/P2Input").set_text(reader2.getDisplayBuffer())
