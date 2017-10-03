@@ -1,7 +1,8 @@
 class CSVreader:
-	var dictionary
 	var path
 	var file
+
+	var table
 	var columns
 	var rows
 
@@ -10,11 +11,12 @@ class CSVreader:
 		self.file = File.new()
 		file.open(path, file.READ)
 		self.columns = file.get_csv_line(",")
-		self.dictionary = []
+		self.table = []
 		self.rows = []
+		#fill things
 		while(!file.eof_reached()):
 			var line = file.get_csv_line(",")
-			self.dictionary.append(line)
+			self.table.append(line)
 			self.rows.append(line[0])
 
 
@@ -36,13 +38,14 @@ class CSVreader:
 
 	func printRows():
 		var rows = ""
-		for entry in dictionary:
+		for entry in table:
 			for point in entry:
 				rows = rows + point + ", "
 			rows = rows + "\n"
 		return rows
 
 
+	#returns (very) obfiscated column number
 	func getColumnNumber(colName):
 		return getIndex(columns, colName)
 
@@ -52,11 +55,6 @@ class CSVreader:
 		return getIndex(rows, str(index))
 
 
-	#gets row number from non obfuscated row
-	func getRow(rowNumber):
-		return rows[getRowNumber(rowNumber)]
-
-
 	#returns entry at position.
 	func getEntry(colName, rowNumber):
-		return dictionary[getRowNumber(rowNumber)][getColumnNumber(colName)]
+		return table[getRowNumber(rowNumber)][getColumnNumber(colName)]
