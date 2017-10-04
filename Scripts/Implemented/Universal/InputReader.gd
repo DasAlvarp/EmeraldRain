@@ -51,6 +51,18 @@ class InputReader:
 		return (horizontal + 2) + (vertical + 1) * 3
 
 
+	#returns the proper depth directional buffer.
+	func getDirectionalBuffer():
+		var dirNums = []
+		if(flipped):
+			for x in range(hBuffer.size() - 1):
+				dirNums.append(getDirNum(hBuffer[x] * -1, vBuffer[x]))
+		else:
+			for x in range(hBuffer.size() - 1):
+				dirNums.append(getDirNum(hBuffer[x], vBuffer[x]))
+		return dirNums
+
+
 	#updates this guy. Should be called every frame for good input reading.
 	func updateBuffer():
 		#first, we take everything off the end of the buffer
@@ -69,6 +81,24 @@ class InputReader:
 		bPressedBuffer[-1] = getVirtualButton(bList, bPressedBuffer[-2])
 		cPressedBuffer[-1] = getVirtualButton(cList, cPressedBuffer[-2])
 		dPressedBuffer[-1] = getVirtualButton(dList, dPressedBuffer[-2])
+
+
+	func clearBuffers():
+		for x in range(aPressedBuffer.size()):
+			self.aPressedBuffer.append(0)
+			self.bPressedBuffer.append(0)
+			self.cPressedBuffer.append(0)
+			self.dPressedBuffer.append(0)
+			self.hBuffer.append(0)
+			self.vBuffer.append(0)
+
+	func getReadBuffer():
+		var buffer = []
+		buffer[0] = aPressedBuffer
+		buffer[1] = bPressedBuffer
+		buffer[2] = cPressedBuffer
+		buffer[3] = dPressedBuffer
+		buffer[4] = getDirectionalBuffer()
 
 
 	#flips the horizontal buffer. Only affects horizontal, and only the final houtput. Everything else is stored seperately.
