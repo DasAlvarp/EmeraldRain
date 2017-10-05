@@ -62,3 +62,11 @@ class CSVreader:
 	#returns entry at position.
 	func getEntry(colName, rowNumber):
 		return table[getRowNumber(rowNumber)][getColumnNumber(colName)]
+
+
+	func getRows():
+		return rows
+
+
+	func getRow(rowNumber):
+		return table[getRowNumber(rowNumber)]
