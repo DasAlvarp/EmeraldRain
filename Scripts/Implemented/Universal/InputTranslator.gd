@@ -46,9 +46,8 @@ class InputTranslator:
 		if(getButtonInput(a, str(inputs[0][-1])) && getButtonInput(b, str(inputs[1][-1])) && getButtonInput(c, str(inputs[2][-1])) && getButtonInput(d, str(inputs[3][-1]))):
 			if(matchGesture(gesture, inputs)):
 				return int(moveList.getEntry("state", row))
+				print("oop" + inputReader.getDisplayBuffer())
 			else:
-				if(inputs[0][-1] == 2):
-					print("oop" + inputReader.getDisplayBuffer())
 				return -1
 		else:
 			return -1
@@ -64,20 +63,22 @@ class InputTranslator:
 			if(gestureKillers.has(str(inputs[4][-direction]))):
 				return false
 			elif(topIndex == str(direction)):
+				#check this before it updates so you know you got the last one.
+				if(gesture.length() == 0):
+					return true
 				gestureContents = getTop(gesture)
 				gestureKillers = gestureContents[1]
 				topIndex = gestureContents[0]
 				gesture = gestureContents[2]
-				if(gesture.length() == 0):
-					return true
 		return false
 
 
+	#chops off the top of an input string and returns it to read.
 	func getTop(gesture):
 		var gestureKillers = []
 		var inBrackets = false
-		for negIndex in range(gesture.length() - 1):
-			var topChar = gesture.substr(gesture.length() - negIndex, 1)
+		for negIndex in range(gesture.length()):
+			var topChar = gesture.substr(gesture.length() - 1 - negIndex, 1)
 			if(topChar == "]"):
 				inBrackets = true
 			elif(topChar == "["):
@@ -88,7 +89,7 @@ class InputTranslator:
 				var returnMe = []
 				returnMe.append(topChar)
 				returnMe.append(gestureKillers)
-				returnMe.append(gesture.substr(0, gesture.length() - negIndex))
+				returnMe.append(gesture.substr(0, gesture.length() - 1 - negIndex))
 				return returnMe
 	
 	
