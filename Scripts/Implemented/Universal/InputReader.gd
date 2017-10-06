@@ -55,10 +55,10 @@ class InputReader:
 	func getDirectionalBuffer():
 		var dirNums = []
 		if(flipped):
-			for x in range(hBuffer.size() - 1):
+			for x in range(hBuffer.size()):
 				dirNums.append(getDirNum(hBuffer[x] * -1, vBuffer[x]))
 		else:
-			for x in range(hBuffer.size() - 1):
+			for x in range(hBuffer.size()):
 				dirNums.append(getDirNum(hBuffer[x], vBuffer[x]))
 		return dirNums
 
@@ -94,12 +94,12 @@ class InputReader:
 
 	func getReadBuffer():
 		var buffer = []
-		buffer[0] = aPressedBuffer
-		buffer[1] = bPressedBuffer
-		buffer[2] = cPressedBuffer
-		buffer[3] = dPressedBuffer
-		buffer[4] = getDirectionalBuffer()
-
+		buffer.append(aPressedBuffer)
+		buffer.append(bPressedBuffer)
+		buffer.append(cPressedBuffer)
+		buffer.append(dPressedBuffer)
+		buffer.append(getDirectionalBuffer())
+		return buffer
 
 	#flips the horizontal buffer. Only affects horizontal, and only the final houtput. Everything else is stored seperately.
 	func flip():

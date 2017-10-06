@@ -15,14 +15,14 @@ class InputTranslator:
 	func getGesture():
 		var size = moveList.getRows()
 		for input in size:
-			var moveState = getMove(moveList.getRow(input))
+			var moveState = getMove(int(input))
 			if(moveState > 0):
 				return moveState
 		return -1
 
 
 	func getMove(row):
-		var gesture = moveList.getEntry(row, "direction")
+		var gesture = moveList.getEntry("direction", row)
 		#for reading buttons:
 		#if a button is pressed, check for 2s.
 		#if the button state doesn't matter, check for 0s
@@ -85,10 +85,12 @@ class InputTranslator:
 				gestureKillers.append(topChar)
 			else:
 				var returnMe = []
-				returnMe[0] = topChar
-				returnMe[1] = gestureKillers
-				returnMe[2] = gesture.substr(0, gesture.length() - negIndex)
-
+				returnMe.append(topChar)
+				returnMe.append(gestureKillers)
+				returnMe.append(gesture.substr(0, gesture.length() - negIndex))
+				return returnMe
+	
+	
 	func getButtonInput(buttonLetter, realInput):
 		if(buttonLetter != "0"):
 			if(buttonLetter == str(realInput)):

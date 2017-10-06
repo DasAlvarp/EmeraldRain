@@ -55,6 +55,7 @@ class CSVreader:
 		return getIndex(rows, str(index))
 
 
+	#returns number of rows
 	func getNumRows():
 		return rows.size()
 
