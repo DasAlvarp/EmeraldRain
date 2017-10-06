@@ -8,6 +8,7 @@ var reader2
 var converter
 var csv
 var state
+var prevState
 
 
 func _ready():
@@ -16,11 +17,17 @@ func _ready():
 	var bButtons = [0, 5]
 	var cButtons = [3, 5]
 	var dButtons = [1]
+	
+	var aKeys = [85]
+	var bKeys = [73]
+	var cKeys = [79]
+	var dKeys = [80]
 	#initialize controllers. They will do things
 	csv = CSVreader.CSVreader.new("res://Assets/Test/GestureDemo.csv")
-	reader = InputReader.InputReader.new(0, aButtons, bButtons, cButtons, dButtons, 15, false)
+	reader = InputReader.InputReader.new(-1, aKeys, bKeys, cKeys, dKeys, 15, false)
 	reader2 = InputReader.InputReader.new(1, aButtons, bButtons, cButtons, dButtons, 15, true)
 	converter = InputTranslator.InputTranslator.new(csv, reader)
+	prevState = converter.getGesture()
 	set_process(true)
 
 
@@ -29,8 +36,12 @@ func _process(delta):
 	reader.updateBuffer()
 	reader2.updateBuffer()
 	state = converter.getGesture()
-	if(state != -1):
-		get_node("Control/CSV").set_text(state)
+	if(prevState != state):
+		get_node("Control/CSV").set_text(str(state))
+		prevState = state
+		if(state == "236"):
+			print("OMG")
+		
 	#display output
 
 	get_node("Control/P1Input").set_text(reader.getDisplayBuffer())

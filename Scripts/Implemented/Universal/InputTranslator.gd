@@ -47,6 +47,7 @@ class InputTranslator:
 			if(matchGesture(gesture, inputs)):
 				return moveList.getEntry("state", row)
 			else:
+				print("oop" + inputReader.getDisplayBuffer())
 				return -1
 		else:
 			return -1
@@ -58,8 +59,8 @@ class InputTranslator:
 		var gestureKillers = gestureContents[1]
 		var topIndex = gestureContents[0]
 		gesture = gestureContents[2]
-		for direction in inputs[4]:
-			if(gestureKillers.has(str(direction))):
+		for direction in range(inputs[4].size() - 1):
+			if(gestureKillers.has(str(inputs[4][-direction]))):
 				return false
 			elif(topIndex == str(direction)):
 				gestureContents = getTop(gesture.substr(0, gesture.length()))
