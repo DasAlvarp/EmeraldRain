@@ -28,21 +28,7 @@ func _ready():
 	reader2 = InputReader.InputReader.new(0, aButtons, bButtons, cButtons, dButtons, 15, true)
 	converter = InputTranslator.InputTranslator.new(csv, reader)
 	prevState = converter.getGesture()
-	
-	var gesture = converter.getTop("789")
-	print(gesture)
-	gesture = converter.getTop(gesture[2])
-	print(gesture)
-	gesture = converter.getTop(gesture[2])
-	print(gesture)
 	set_process(true)
-	
-	var gesture = converter.getTop("3")
-	print("thing here")
-	print("3".length())
-	print("3".substr("3".length() - 1, 1))
-	print(gesture)
-	print("not here")
 
 
 func _process(delta):
