@@ -25,7 +25,7 @@ func _ready():
 	#initialize controllers. They will do things
 	csv = CSVreader.CSVreader.new("res://Assets/Test/GestureDemo.csv")
 	reader = InputReader.InputReader.new(-1, aKeys, bKeys, cKeys, dKeys, 15, false)
-	reader2 = InputReader.InputReader.new(1, aButtons, bButtons, cButtons, dButtons, 15, true)
+	reader2 = InputReader.InputReader.new(0, aButtons, bButtons, cButtons, dButtons, 15, true)
 	converter = InputTranslator.InputTranslator.new(csv, reader)
 	prevState = converter.getGesture()
 	

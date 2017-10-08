@@ -77,7 +77,7 @@ class InputTranslator:
 		var gestureKillers = []
 		var inBrackets = false
 		var topChar = ""
-		for negIndex in range(1, gesture.length()):
+		for negIndex in range(1, gesture.length() + 1):
 			topChar = gesture.substr(gesture.length() - negIndex, 1)
 			print(topChar)
 			if(topChar == "]"):

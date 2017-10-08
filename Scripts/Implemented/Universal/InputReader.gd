@@ -75,7 +75,7 @@ class InputReader:
 			vBuffer[x] = vBuffer[x+1]
 		
 		#now we add the current states to the end
-		if(deviceNum  > 0):
+		if(deviceNum  >= 0):
 			hBuffer[-1] = getDirectional(15, 14)#15 is right, 14 is left
 			vBuffer[-1] = getDirectional(12, 13)#12 is up, 13 is down
 		else:
@@ -171,7 +171,7 @@ class InputReader:
 
 	#just checking if the button is down. Return true if it's down, but there might be others if it isn't.
 	func getVirtualButtonDown(buttonList):
-		if(deviceNum > 0):
+		if(deviceNum >= 0):
 			for x in buttonList:
 				if(Input.is_joy_button_pressed(deviceNum, x)):
 					return true
