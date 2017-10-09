@@ -54,23 +54,29 @@ class InputTranslator:
 		#this way, if there's no input, it picks it by default. (5a,b,etc...)
 		if(gesture.length() == 0):
 			return true
-		var stickiness = gesture.right(gesture.length() - 1)
-		var gestureContents = getTop(gesture.substr(0, gesture.length() - 1))
-		var gestureKillers = gestureContents[1]
-		var topIndex = gestureContents[0]
-		gesture = gestureContents[2]
-		for direction in range(1, inputs[4].size() + 1):
-			if(gestureKillers.has(str(inputs[4][-direction]))):
+		elif(gesture.length() == 1):
+			if(gesture == str(inputs[4][-1])):
+				return true
+			else:
 				return false
-			elif(topIndex == str(inputs[4][-direction])):
-				#check this before it updates so you know you got the last one.
-				if(gesture.length() == 0):
-					return true
-				gestureContents = getTop(gesture)
-				topIndex = gestureContents[0]
-				gestureKillers = gestureContents[1]
-				gesture = gestureContents[2]
-		return false
+		else:
+			var stickiness = gesture.right(gesture.length() - 1)
+			var gestureContents = getTop(gesture.substr(0, gesture.length() - 1))
+			var gestureKillers = gestureContents[1]
+			var topIndex = gestureContents[0]
+			gesture = gestureContents[2]
+			for direction in range(1, inputs[4].size() + 1):
+				if(gestureKillers.has(str(inputs[4][-direction]))):
+					return false
+				elif(topIndex == str(inputs[4][-direction])):
+					#check this before it updates so you know you got the last one.
+					if(gesture.length() == 0):
+						return true
+					gestureContents = getTop(gesture)
+					topIndex = gestureContents[0]
+					gestureKillers = gestureContents[1]
+					gesture = gestureContents[2]
+			return false
 
 
 	#chops off the top of an input string and returns it to read.
