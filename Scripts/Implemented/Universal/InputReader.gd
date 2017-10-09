@@ -80,7 +80,7 @@ class InputReader:
 			vBuffer[-1] = getDirectional(12, 13)#12 is up, 13 is down
 		else:
 			hBuffer[-1] = getDirectionalKeyboard(68, 65)#15 is right, 14 is left
-			vBuffer[-1] = getDirectionalKeyboard(87, 83)#12 is up, 13 is down
+			vBuffer[-1] = getDirectionalKeyboard(87, 83)#12 is up, 13 is down 87 = w, 64 = sp?
 
 		aPressedBuffer[-1] = getVirtualButton(aList, aPressedBuffer[-2])
 		bPressedBuffer[-1] = getVirtualButton(bList, bPressedBuffer[-2])
@@ -161,12 +161,12 @@ class InputReader:
 			if(isDown):
 				return 2
 			else:
-				return 0
+				return -1
 		else:
 			if(isDown):
 				return 1
 			else:
-				return -1
+				return -2
 
 
 	#just checking if the button is down. Return true if it's down, but there might be others if it isn't.

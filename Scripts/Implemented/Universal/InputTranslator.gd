@@ -32,21 +32,15 @@ class InputTranslator:
 		#if the button needs to be down, check for 1s.
 		#if the button needs to be up check for -1s.
 		#if the button needs to be released, check for -2s.
-		#buffer[0] = aPressedBuffer
-		#buffer[1] = bPressedBuffer
-		#buffer[2] = cPressedBuffer
-		#buffer[3] = dPressedBuffer
-		#buffer[4] = getDirectionalBuffer()
-		
-		#first make sure inputs are fine. Only have to worry about f1, so yeah.
+		#first make sure inputs are fine. Only have to worry about frame 1 buttons
 		var inputs = inputReader.getReadBuffer()
 		var a = moveList.getEntry("a", row)
 		var b = moveList.getEntry("b", row)
 		var c = moveList.getEntry("c", row)
 		var d = moveList.getEntry("d", row)
 		
-		#for now, we'll just care about button pressed
-		if(getButtonInput(a, str(inputs[0][-1])) && getButtonInput(b, str(inputs[1][-1])) && getButtonInput(c, str(inputs[2][-1])) && getButtonInput(d, str(inputs[3][-1]))):
+		#for now, we'll just care about button pressed. Note order of getInputs to get priority.
+		if(getButtonInput(d, str(inputs[3][-1])) && getButtonInput(c, str(inputs[2][-1])) && getButtonInput(b, str(inputs[1][-1])) && getButtonInput(a, str(inputs[0][-1]))):
 			if(matchGesture(gesture, inputs)):
 				return int(moveList.getEntry("state", row))
 			else:
@@ -55,8 +49,9 @@ class InputTranslator:
 			return -1
 
 
+	#given gesture string, return appropriate state.
 	func matchGesture(gesture, inputs):
-		#this way, if there's no input, it picks it by default. (5a,b,cetc)
+		#this way, if there's no input, it picks it by default. (5a,b,etc...)
 		if(gesture.length() == 0):
 			return true
 		var stickiness = gesture.right(gesture.length() - 1)
@@ -100,6 +95,7 @@ class InputTranslator:
 				return returnMe
 
 
+	#compares button press to what the gesture wants.
 	func getButtonInput(buttonLetter, realInput):
 		if(buttonLetter != "0"):
 			if(buttonLetter == realInput):
