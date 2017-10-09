@@ -55,10 +55,10 @@ class InputReader:
 	func getDirectionalBuffer():
 		var dirNums = []
 		if(flipped):
-			for x in range(hBuffer.size() - 1):
+			for x in range(hBuffer.size()):
 				dirNums.append(getDirNum(hBuffer[x] * -1, vBuffer[x]))
 		else:
-			for x in range(hBuffer.size() - 1):
+			for x in range(hBuffer.size()):
 				dirNums.append(getDirNum(hBuffer[x], vBuffer[x]))
 		return dirNums
 
@@ -75,8 +75,13 @@ class InputReader:
 			vBuffer[x] = vBuffer[x+1]
 		
 		#now we add the current states to the end
-		hBuffer[-1] = getDirectional(15, 14)#15 is right, 14 is left
-		vBuffer[-1] = getDirectional(12, 13)#12 is up, 13 is down
+		if(deviceNum  >= 0):
+			hBuffer[-1] = getDirectional(15, 14)#15 is right, 14 is left
+			vBuffer[-1] = getDirectional(12, 13)#12 is up, 13 is down
+		else:
+			hBuffer[-1] = getDirectionalKeyboard(68, 65)#15 is right, 14 is left
+			vBuffer[-1] = getDirectionalKeyboard(87, 83)#12 is up, 13 is down 87 = w, 64 = sp?
+
 		aPressedBuffer[-1] = getVirtualButton(aList, aPressedBuffer[-2])
 		bPressedBuffer[-1] = getVirtualButton(bList, bPressedBuffer[-2])
 		cPressedBuffer[-1] = getVirtualButton(cList, cPressedBuffer[-2])
@@ -94,12 +99,12 @@ class InputReader:
 
 	func getReadBuffer():
 		var buffer = []
-		buffer[0] = aPressedBuffer
-		buffer[1] = bPressedBuffer
-		buffer[2] = cPressedBuffer
-		buffer[3] = dPressedBuffer
-		buffer[4] = getDirectionalBuffer()
-
+		buffer.append(aPressedBuffer)
+		buffer.append(bPressedBuffer)
+		buffer.append(cPressedBuffer)
+		buffer.append(dPressedBuffer)
+		buffer.append(getDirectionalBuffer())
+		return buffer
 
 	#flips the horizontal buffer. Only affects horizontal, and only the final houtput. Everything else is stored seperately.
 	func flip():
@@ -137,10 +142,18 @@ class InputReader:
 		var dirNum = 0
 		if(Input.is_joy_button_pressed(deviceNum, positiveID)):
 			dirNum += 1
-		elif(Input.is_joy_button_pressed(deviceNum, negativeID)):
+		if(Input.is_joy_button_pressed(deviceNum, negativeID)):
 			dirNum -= 1
 		return dirNum
 
+
+	func getDirectionalKeyboard(keyPositive, keyNegative):
+		var dirNum = 0
+		if(Input.is_key_pressed(int(keyPositive))):
+			dirNum += 1
+		if(Input.is_key_pressed(int(keyNegative))):
+			dirNum -= 1
+		return dirNum
 
 	func getVirtualButton(buttonList, prevState):
 		var isDown = getVirtualButtonDown(buttonList)
@@ -148,17 +161,23 @@ class InputReader:
 			if(isDown):
 				return 2
 			else:
-				return 0
+				return -1
 		else:
 			if(isDown):
 				return 1
 			else:
-				return -1
+				return -2
 
 
 	#just checking if the button is down. Return true if it's down, but there might be others if it isn't.
 	func getVirtualButtonDown(buttonList):
-		for x in buttonList:
-			if(Input.is_joy_button_pressed(deviceNum, x)):
-				return true
-		return false
+		if(deviceNum >= 0):
+			for x in buttonList:
+				if(Input.is_joy_button_pressed(deviceNum, x)):
+					return true
+			return false
+		else:
+			for x in buttonList:
+				if(Input.is_key_pressed(int(x))):
+					return true
+			return false
