@@ -8,10 +8,12 @@ class InputTranslator:
 		self.inputReader = inputReader
 
 
+	#used by char to send appropriate list.
 	func updateList(moveList):
 		self.moveList = moveList
 
 
+	#finds appropriate gesture from movelist.
 	func getGesture():
 		var size = moveList.getRows()
 		for input in size:
@@ -21,6 +23,7 @@ class InputTranslator:
 		return -1
 
 
+	#check if appropriate move is active.
 	func getMove(row):
 		var gesture = moveList.getEntry("direction", row)
 		#for reading buttons:
@@ -53,6 +56,9 @@ class InputTranslator:
 
 
 	func matchGesture(gesture, inputs):
+		#this way, if there's no input, it picks it by default. (5a,b,cetc)
+		if(gesture.length() == 0):
+			return true
 		var stickiness = gesture.right(gesture.length() - 1)
 		var gestureContents = getTop(gesture.substr(0, gesture.length() - 1))
 		var gestureKillers = gestureContents[1]
@@ -92,8 +98,8 @@ class InputTranslator:
 				var ret = gesture.substr(0, gesture.length() - negIndex)
 				returnMe.append(ret)
 				return returnMe
-	
-	
+
+
 	func getButtonInput(buttonLetter, realInput):
 		if(buttonLetter != "0"):
 			if(buttonLetter == realInput):

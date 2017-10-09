@@ -20,6 +20,10 @@ class CSVreader:
 			self.rows.append(line[0])
 
 
+	#used to ID the table.
+	func getPath():
+		return self.path
+
 	#returns the integer index of array
 	func getIndex(stringArray, entry):
 		var index = 0

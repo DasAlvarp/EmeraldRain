@@ -8,7 +8,6 @@ var reader2
 var converter
 var csv
 var state
-var prevState
 
 
 func _ready():
@@ -27,7 +26,6 @@ func _ready():
 	reader = InputReader.InputReader.new(-1, aKeys, bKeys, cKeys, dKeys, 15, false)
 	reader2 = InputReader.InputReader.new(0, aButtons, bButtons, cButtons, dButtons, 15, true)
 	converter = InputTranslator.InputTranslator.new(csv, reader)
-	prevState = converter.getGesture()
 	set_process(true)
 
 
@@ -36,14 +34,11 @@ func _process(delta):
 	reader.updateBuffer()
 	reader2.updateBuffer()
 	state = converter.getGesture()
-	if(prevState != state):
-		get_node("Control/CSV").set_text(str(state))
-		prevState = state
-		if(str(state) == "236"):
-			print("OMG")
-			return 
-		
+	
 	#display output
+	if(str(state) != "-1"):
+		print(str(state))
+		get_node("Control/CSV").set_text(str(state))
 
 	get_node("Control/P1Input").set_text(reader.getDisplayBuffer())
 	get_node("Control/P2Input").set_text(reader2.getDisplayBuffer())
