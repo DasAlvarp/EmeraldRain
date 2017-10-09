@@ -61,7 +61,7 @@ class InputTranslator:
 		for direction in range(1, inputs[4].size() + 1):
 			if(gestureKillers.has(str(inputs[4][-direction]))):
 				return false
-			elif(topIndex == str(direction)):
+			elif(topIndex == str(inputs[4][-direction])):
 				#check this before it updates so you know you got the last one.
 				if(gesture.length() == 0):
 					return true
