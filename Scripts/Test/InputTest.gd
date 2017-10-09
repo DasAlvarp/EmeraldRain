@@ -39,7 +39,7 @@ func _process(delta):
 	if(prevState != state):
 		get_node("Control/CSV").set_text(str(state))
 		prevState = state
-		if(state == "236"):
+		if(str(state) == "236"):
 			print("OMG")
 			return 
 		
