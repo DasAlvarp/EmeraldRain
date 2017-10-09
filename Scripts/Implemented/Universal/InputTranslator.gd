@@ -54,7 +54,7 @@ class InputTranslator:
 		#this way, if there's no input, it picks it by default. (5a,b,etc...)
 		if(gesture.length() == 0):
 			return true
-		elif(gesture.length() == 1):
+		elif(gesture.length() == 1):#manual check for command normals (should speed things up)
 			if(gesture == str(inputs[4][-1])):
 				return true
 			else:

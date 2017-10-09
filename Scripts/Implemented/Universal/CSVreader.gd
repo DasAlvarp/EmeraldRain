@@ -33,6 +33,7 @@ class CSVreader:
 			index += 1
 
 
+	#prints out the name of all cols
 	func printColumns():
 		var cols = ""
 		for header in columns:
@@ -40,6 +41,7 @@ class CSVreader:
 		return cols
 
 
+	#prints contents of all rows.
 	func printRows():
 		var rows = ""
 		for entry in table:
@@ -69,9 +71,11 @@ class CSVreader:
 		return table[getRowNumber(rowNumber)][getColumnNumber(colName)]
 
 
+	#returns row numbers. For things with big spaces in the middle.
 	func getRows():
 		return rows
 
 
+	#returns entire row. Remember it's just an array now.
 	func getRow(rowNumber):
 		return table[getRowNumber(rowNumber)]
