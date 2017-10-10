@@ -80,6 +80,7 @@ class InputTranslator:
 					topIndex = gestureContents[0]
 					gestureKillers = gestureContents[1]
 					gesture = gestureContents[2]
+					#for movement type inputs to not be bufferrable: make sure they're lined up right
 					if(stickiness == "1"):
 						if(int(topIndex) != inputs[4][-2] || int(oldTop) != inputs[4][-1]):
 							return false
