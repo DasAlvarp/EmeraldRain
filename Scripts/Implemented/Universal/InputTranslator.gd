@@ -65,6 +65,7 @@ class InputTranslator:
 			var gestureKillers = gestureContents[1]
 			var topIndex = gestureContents[0]
 			gesture = gestureContents[2]
+			var deltaF
 			for direction in range(1, inputs[4].size() + 1):
 				if(gestureKillers.has(str(inputs[4][-direction]))):
 					return false
@@ -76,6 +77,15 @@ class InputTranslator:
 					topIndex = gestureContents[0]
 					gestureKillers = gestureContents[1]
 					gesture = gestureContents[2]
+					if(stickiness == "1"):
+						var dir = - direction - 1
+						if(dir < 1):
+							return false
+						else:
+							if(int(topIndex) != inputs[4][dir]):
+								return false
+							else:
+								stickiness = "n"
 			return false
 
 
