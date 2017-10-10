@@ -72,12 +72,16 @@ class InputTranslator:
 					#check this before it updates so you know you got the last one.
 					if(gesture.length() == 0):
 						return true
+						
+					var oldTop
+					if(stickiness == "1"):
+						oldTop = topIndex
 					gestureContents = getTop(gesture)
 					topIndex = gestureContents[0]
 					gestureKillers = gestureContents[1]
 					gesture = gestureContents[2]
 					if(stickiness == "1"):
-						if(int(topIndex) != inputs[4][-2]):
+						if(int(topIndex) != inputs[4][-2] || int(oldTop) != inputs[4][-1]):
 							return false
 						else:
 							stickiness = "n"
