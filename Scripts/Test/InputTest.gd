@@ -11,7 +11,7 @@ var state
 
 
 func _ready():
-	#how button maps are registered. In an actual game, this would be set semi-dynamically at the start.
+	#how button maps are registered. In a game, this would be set semi-dynamically at the start.
 	var aButtons = [2]
 	var bButtons = [0, 5]
 	var cButtons = [3, 5]
