@@ -61,7 +61,7 @@ class Player:
 
 	#updates player info.
 	func updatePlayerInfo():
-		state = character.character.getState(state, statelock, meter, resource, physics, flow)
+		state = character.getState(state, statelock, meter, resource, physics, flow)
 		statelock -= 1
 
 
