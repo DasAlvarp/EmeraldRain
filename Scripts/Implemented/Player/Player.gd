@@ -1,4 +1,4 @@
-class player:
+class Player:
 	var character #paths to char will be generated.
 	var skin
 	var inputReader
@@ -31,7 +31,7 @@ class player:
 
 	func _init(playerNum, controllerNum, character, skin, buttonMaps):
 		self.inputReader = load("res://Scripts/Implemented/Universal/InputReader.gd").InputReader.new(controllerNum, buttonMaps[0], buttonMaps[1], buttonMaps[2], buttonMaps[3], 15, playerNum != 0)#if it's not player1, it's not flipped 
-		self.character = load("res://Scripts/Implemented/" . character . "/Controller.gd").Controller.new(skin, inputReader)
+		self.character = load("res://Scripts/Implemented/Character/" + character + "/Controller.gd").Controller.new(skin, inputReader)
 		self.skin = skin
 		self.maxHp = self.character.getMaxHp()
 		self.hp = maxHp
@@ -60,7 +60,7 @@ class player:
 	#updates player info.
 	func updatePlayerInfo():
 		statelock -= 1
-		state = character.character.getState(state, meter, resource, physics, flow)
+		state = character.character.getState(state, statelock, meter, resource, physics, flow)
 
 
 	#this is the part that the big controller would control
