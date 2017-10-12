@@ -48,3 +48,8 @@ class player:
 		self.maxWeight = self.character.getMaxWeight()
 		self.weight = self.maxWeight
 		self.friction = true
+
+
+	#returns weight for hitstun decay, etc.
+	func getWeight():
+		return weight
