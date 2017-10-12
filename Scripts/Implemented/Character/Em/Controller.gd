@@ -13,6 +13,7 @@ class Controller:
 		var CSVreader = load("res://Scripts/Implemented/Universal/CSVreader.gd")
 		self.skin = skin
 		self.inputReader = inputReader
+		stateTable = CSVreader.CSVreader.new("res://Assets/Character/Em/Tables/States.csv")
 		moveList = []
 		moveList.append(CSVreader.CSVreader.new("res://Assets/Character/Em/Tables/Cancel/0.csv"))
 		self.inputTranslator = InputTranslator.InputTranslator.new(moveList[0], inputReader)
