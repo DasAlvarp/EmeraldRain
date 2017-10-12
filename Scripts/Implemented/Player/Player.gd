@@ -59,12 +59,10 @@ class Player:
 
 	#updates player info.
 	func updatePlayerInfo():
-		statelock -= 1
 		state = character.character.getState(state, statelock, meter, resource, physics, flow)
+		statelock -= 1
 
 
 	#this is the part that the big controller would control
-	func setPlayerInfo(health, state, statelock, x, y, xVel, yVel):
-		hp = health
-		self.state = state
-		self.statelock = statelock
+	func hitPlayer(damage, hitType, hitstun, xPow, yPow):
+		hp -= damage
