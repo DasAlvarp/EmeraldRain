@@ -9,8 +9,9 @@ class Player:
 	var yVelocity
 	var xPos
 	var yPos
-	var otherChar #true if other char is to the RIGHt
-	var dirFacing	#true if facing to the RIGHT
+	var otherChar #true if other char is to the RIGHT
+	var dirFacing#true if facing to the RIGHT
+	var canTurn
 	var physics
 
 	var counterHit
@@ -35,10 +36,11 @@ class Player:
 		self.skin = skin
 		self.maxHp = self.character.getMaxHp()
 		self.hp = maxHp
-		self.xVelocity = 0
-		self.yVelocity = 0
-		self.dirFacing = playerNum != 0
-		self.otherChar = playerNum != 0
+		xVelocity = 0
+		yVelocity = 0
+		dirFacing = playerNum != 0
+		otherChar = playerNum != 0
+		canTurn = true
 		self.physics = false #this means it's on the ground
 		self.state = 0
 		self.statelock = 0
