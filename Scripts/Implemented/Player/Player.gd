@@ -53,3 +53,12 @@ class player:
 	#returns weight for hitstun decay, etc.
 	func getWeight():
 		return weight
+
+
+	#updates player info.
+	func updatePlayerInfo():
+		statelock -= 1
+
+
+	#this is the part that the big controller would control
+	func setPlayerInfo(health, hp, state, statelock, )
