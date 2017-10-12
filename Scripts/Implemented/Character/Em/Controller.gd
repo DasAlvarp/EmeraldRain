@@ -29,5 +29,10 @@ class Controller:
 		return 400
 
 
-	func getState(state, meter, resources, grounded):
-		
+	func getState(state, meter, resources, grounded, flow):
+		if(statelock > 0):
+			#calculate stuff
+			if(grounded && state > 4500):#aerial hitstun to the ground should end in a grounded state
+				return KNOCKOWN#probably make a universal knockdown state.
+		else:
+			#return to neutral state.

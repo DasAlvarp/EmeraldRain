@@ -13,6 +13,7 @@ class player:
 	var dirFacing	#true if facing to the RIGHT
 	var physics
 
+	var counterHit
 	var state
 	var statelock
 	
@@ -48,6 +49,7 @@ class player:
 		self.maxWeight = self.character.getMaxWeight()
 		self.weight = self.maxWeight
 		self.friction = true
+		self.counterHit = false
 
 
 	#returns weight for hitstun decay, etc.
@@ -58,7 +60,11 @@ class player:
 	#updates player info.
 	func updatePlayerInfo():
 		statelock -= 1
+		state = character.character.getState(state, meter, resource, physics, flow)
 
 
 	#this is the part that the big controller would control
-	func setPlayerInfo(health, hp, state, statelock, )
+	func setPlayerInfo(health, state, statelock, x, y, xVel, yVel):
+		hp = health
+		self.state = state
+		self.statelock = statelock
