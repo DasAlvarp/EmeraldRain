@@ -21,6 +21,11 @@ class player:
 	var meter
 	var maxMeter
 	
+	var friction
+	
+	var weight
+	var maxWeight
+	
 	var flow
 
 	func _init(playerNum, controllerNum, character, skin, buttonMaps):
@@ -40,3 +45,6 @@ class player:
 		self.maxMeter = self.character.getMaxMeter()
 		self.meter = self.character.getStartingMeter()
 		self.flow = self.character.getStartingFlow()
+		self.maxWeight = self.character.getMaxWeight()
+		self.weight = self.maxWeight
+		self.friction = true

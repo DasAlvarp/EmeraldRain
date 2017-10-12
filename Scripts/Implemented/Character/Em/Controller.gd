@@ -21,3 +21,7 @@ class Controller:
 
 	func getStartingFlow():
 		return 1
+
+
+	func getMaxWeight():
+		return 400
