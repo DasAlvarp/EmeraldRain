@@ -3,8 +3,9 @@ class Controller:
 	var skin
 
 	var stateTable
-	var inputTable#will be array of N tables of all the cancel states. Every cahracter will have at least 14: 4 for normals (a->a+, b->c+. c->d+, d->sp+, sp->super, dashing forward, standing, and all of this shit for air. That's assuming the state is cancellable.
+	var inputTable#will be array of N tables of all the cancel states. Every cahracter will have at least 15: 4 for normals (a->a+, b->c+. c->d+, d->sp+, sp->super, dashing forward, standing, techable states, and all of this shit for air. That's assuming the state is cancellable.
 	var inputTranslator
+
 
 	func _init(skin, inputReader):
 		self.skin = skin
