@@ -11,7 +11,7 @@ func _ready():
 	keys.append([79])
 	keys.append([80])
 	
-	player = load("res://Scripts/Implemented/Player/Player.gd").Player.new(0, 0, "Em", 0, keys)
+	player = load("res://Scripts/Implemented/Player/Player.gd").Player.new(0, -1, "Em", 0, keys)
 	
 	set_process(true)
 

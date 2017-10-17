@@ -38,22 +38,22 @@ class Controller:
 	func getMaxWeight():
 		return 400
 
-
+	func getStatelock(state):
+		return int(stateTable.getEntry("InitialStatelock", state))
 
 	func getState(state, statelock, meter, resources, grounded, flow):
 		inputReader.updateBuffer()
-		if(statelock > 0):
+		if(stateTable.getEntry("Cancel", state) == "0"):
+			inputTranslator.updateList(self.moveList[0])
+			var newState = inputTranslator.getGesture() 
+			if(newState > -1):
+				return newState
+			else:
+				return state
+		elif(statelock > -1):
 			#calculate stuff
 			if(grounded && state > 4500):#aerial hitstun to the ground should end in a grounded state
 				return 2#Knockdown
-			elif(stateTable.getEntry("Cancel", state) == "0"):
-				inputTranslator.updateList(moveList[0])
-				var newState = inputTranslator.getGesture() 
-				if(newState > -1):
-					return newState
-				else:
-					return state
-					
 		else:
 			#go to autocancel state
 			return int(stateTable.getEntry("AutoCancel", state))

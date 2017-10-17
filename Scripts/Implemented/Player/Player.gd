@@ -15,6 +15,7 @@ class Player:
 	var physics
 
 	var counterHit
+	var curState
 	var state
 	var statelock
 	
@@ -61,8 +62,13 @@ class Player:
 
 	#updates player info.
 	func updatePlayerInfo():
+		curState = state
 		state = character.getState(state, statelock, meter, resource, physics, flow)
-		statelock -= 1
+		if(curState != state):
+			statelock = character.getStatelock(state)
+			curState = state
+		else:
+			statelock -= 1
 
 
 	#gets state

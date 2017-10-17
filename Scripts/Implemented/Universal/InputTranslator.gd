@@ -19,6 +19,7 @@ class InputTranslator:
 		for input in size:
 			var moveState = getMove(int(input))
 			if(moveState > 0):
+				print(moveState)
 				return moveState
 		return -1
 
