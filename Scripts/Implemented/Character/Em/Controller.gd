@@ -38,8 +38,10 @@ class Controller:
 	func getMaxWeight():
 		return 400
 
+
 	func getStatelock(state):
 		return int(stateTable.getEntry("InitialStatelock", state))
+
 
 	func getState(state, statelock, meter, resources, grounded, flow):
 		inputReader.updateBuffer()
@@ -54,6 +56,8 @@ class Controller:
 			#calculate stuff
 			if(grounded && state > 4500):#aerial hitstun to the ground should end in a grounded state
 				return 2#Knockdown
+			else:
+				return state
 		else:
 			#go to autocancel state
 			return int(stateTable.getEntry("AutoCancel", state))
