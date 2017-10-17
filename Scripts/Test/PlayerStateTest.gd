@@ -18,3 +18,4 @@ func _ready():
 
 func _process(delta):
 	player.updatePlayerInfo()
+	get_node("Control/Label").set_text(str(player.getState()))

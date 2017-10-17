@@ -65,6 +65,10 @@ class Player:
 		statelock -= 1
 
 
+	#gets state
+	func getState():
+		return state
+
 	#this is the part that the big controller would control
 	func hitPlayer(damage, hitType, hitstun, xPow, yPow):
 		hp -= damage

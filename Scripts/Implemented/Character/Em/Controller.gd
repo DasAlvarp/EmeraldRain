@@ -43,6 +43,8 @@ class Controller:
 		if(statelock > 0):
 			#calculate stuff
 			if(grounded && state > 4500):#aerial hitstun to the ground should end in a grounded state
-				return 2#probably make a universal knockdown state.
+				return 2#Knockdown
 		else:
 			#return to neutral state.
+			if(grounded):
+				return 0
