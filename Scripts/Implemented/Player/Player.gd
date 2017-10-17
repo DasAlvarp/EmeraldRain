@@ -31,6 +31,7 @@ class Player:
 	
 	var flow
 
+
 	func _init(playerNum, controllerNum, character, skin, buttonMaps):
 		self.inputReader = load("res://Scripts/Implemented/Universal/InputReader.gd").InputReader.new(controllerNum, buttonMaps[0], buttonMaps[1], buttonMaps[2], buttonMaps[3], 15, playerNum != 0)#if it's not player1, it's not flipped 
 		self.character = load("res://Scripts/Implemented/Character/" + character + "/Controller.gd").Controller.new(skin, inputReader)
@@ -44,6 +45,7 @@ class Player:
 		canTurn = true
 		self.physics = false #this means it's on the ground
 		self.state = 0
+		self.curState = 0
 		self.statelock = 0
 		self.resource = self.character.getStartingRes()
 		self.maxMeter = self.character.getMaxMeter()
@@ -63,10 +65,11 @@ class Player:
 	#updates player info.
 	func updatePlayerInfo():
 		curState = state
+		character.updateCancels(state)
 		state = character.getState(state, statelock, meter, resource, physics, flow)
 		if(curState != state):
 			statelock = character.getStatelock(state)
-			curState = state
+			print(state)
 		else:
 			statelock -= 1
 
@@ -74,6 +77,7 @@ class Player:
 	#gets state
 	func getState():
 		return state
+
 
 	#this is the part that the big controller would control
 	func hitPlayer(damage, hitType, hitstun, xPow, yPow):

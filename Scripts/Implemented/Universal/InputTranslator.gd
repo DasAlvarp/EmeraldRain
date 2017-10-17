@@ -19,7 +19,6 @@ class InputTranslator:
 		for input in size:
 			var moveState = getMove(int(input))
 			if(moveState > 0):
-				print(moveState)
 				return moveState
 		return -1
 
@@ -73,7 +72,6 @@ class InputTranslator:
 					#check this before it updates so you know you got the last one.
 					if(gesture.length() == 0):
 						return true
-						
 					var oldTop
 					if(stickiness == "1"):
 						oldTop = topIndex

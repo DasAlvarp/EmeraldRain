@@ -16,6 +16,7 @@ class Controller:
 		stateTable = CSVreader.CSVreader.new("res://Assets/Character/Em/Tables/States.csv")
 		moveList = []
 		moveList.append(CSVreader.CSVreader.new("res://Assets/Character/Em/Tables/Cancel/0.csv"))
+		moveList.append(CSVreader.CSVreader.new("res://Assets/Character/Em/Tables/Cancel/1.csv"))
 		self.inputTranslator = InputTranslator.InputTranslator.new(moveList[0], inputReader)
 
 
@@ -43,16 +44,21 @@ class Controller:
 		return int(stateTable.getEntry("InitialStatelock", state))
 
 
+	func updateCancels(state):
+		var cancelNum = int(stateTable.getEntry("Cancel", state))
+		if(cancelNum != -1):
+			inputTranslator.updateList(moveList[cancelNum])
+
+
+	#returns state. Probably should return vel. info, etc.
 	func getState(state, statelock, meter, resources, grounded, flow):
 		inputReader.updateBuffer()
-		if(stateTable.getEntry("Cancel", state) == "0"):
-			inputTranslator.updateList(self.moveList[0])
+		if(stateTable.getEntry("Cancel", state) != "-1"):
 			var newState = inputTranslator.getGesture() 
 			if(newState > -1):
 				return newState
-			else:
-				return state
-		elif(statelock > -1):
+	
+		if(statelock > -1):
 			#calculate stuff
 			if(grounded && state > 4500):#aerial hitstun to the ground should end in a grounded state
 				return 2#Knockdown
