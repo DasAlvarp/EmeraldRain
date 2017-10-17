@@ -39,12 +39,21 @@ class Controller:
 		return 400
 
 
+
 	func getState(state, statelock, meter, resources, grounded, flow):
+		inputReader.updateBuffer()
 		if(statelock > 0):
 			#calculate stuff
 			if(grounded && state > 4500):#aerial hitstun to the ground should end in a grounded state
 				return 2#Knockdown
+			elif(stateTable.getEntry("Cancel", state) == "0"):
+				inputTranslator.updateList(moveList[0])
+				var newState = inputTranslator.getGesture() 
+				if(newState > -1):
+					return newState
+				else:
+					return state
+					
 		else:
-			#return to neutral state.
-			if(grounded):
-				return 0
+			#go to autocancel state
+			return int(stateTable.getEntry("AutoCancel", state))
