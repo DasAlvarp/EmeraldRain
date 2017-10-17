@@ -53,6 +53,7 @@ class Controller:
 	#returns state. Probably should return vel. info, etc.
 	func getState(state, statelock, meter, resources, grounded, flow):
 		inputReader.updateBuffer()
+		
 		if(stateTable.getEntry("Cancel", state) != "-1"):
 			var newState = inputTranslator.getGesture() 
 			if(newState > -1):
