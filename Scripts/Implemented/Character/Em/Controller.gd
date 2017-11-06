@@ -17,6 +17,7 @@ class Controller:
 		moveList = []
 		moveList.append(CSVreader.CSVreader.new("res://Assets/Character/Em/Tables/Cancel/0.csv"))
 		moveList.append(CSVreader.CSVreader.new("res://Assets/Character/Em/Tables/Cancel/1.csv"))
+		moveList.append(CSVreader.CSVreader.new("res://Assets/Character/Em/Tables/Cancel/2.csv"))
 		self.inputTranslator = InputTranslator.InputTranslator.new(moveList[0], inputReader)
 
 
