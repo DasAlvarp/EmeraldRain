@@ -1,19 +1,46 @@
 [gd_scene format=1]
 
-[node name="Button" type="Button"]
+[node name="Root" type="Control"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 239.0
-margin/top = 85.0
-margin/right = 465.0
-margin/bottom = 167.0
+margin/left = 104.0
+margin/top = 93.0
+margin/right = 330.0
+margin/bottom = 175.0
+
+[node name="SaveButton" type="Button" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 56.0
+margin/bottom = 26.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
-text = "what up tho"
+text = "Save"
+flat = false
+
+[node name="LoadButton" type="Button" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 61.0
+margin/top = -1.0
+margin/right = 130.0
+margin/bottom = 27.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Load"
 flat = false
 
 
