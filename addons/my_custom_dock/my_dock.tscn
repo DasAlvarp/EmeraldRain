@@ -1,4 +1,6 @@
-[gd_scene format=1]
+[gd_scene load_steps=2 format=1]
+
+[ext_resource path="res://addons/my_custom_dock/ItemListEdit.gd" type="Script" id=1]
 
 [node name="Root" type="Control"]
 
@@ -42,5 +44,48 @@ enabled_focus_mode = 2
 shortcut = null
 text = "Load"
 flat = false
+
+[node name="Path" type="LineEdit" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 4.0
+margin/top = 35.0
+margin/right = 152.0
+margin/bottom = 59.0
+placeholder/text = "Path"
+placeholder/alpha = 0.6
+focus_mode = 2
+caret/caret_blink = false
+caret/caret_blink_speed = 0.65
+
+[node name="ItemList" type="ItemList" parent="."]
+
+rect/min_size = Vector2( 3, 3 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 7.0
+margin/top = 59.0
+margin/right = 42.0
+margin/bottom = 98.0
+script/script = ExtResource( 1 )
+
+[node name="ErrorMsg" type="Label" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 9.0
+margin/top = 64.0
+margin/right = 275.0
+margin/bottom = 95.0
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
 
 
