@@ -1,10 +1,14 @@
-extends Tool
+tool
+extends Button
 
 # class member variables go here, for example:
 # var a = 2
 # var b = "textvar"
 
-func _ready():
+func _enter_tree():
 	# Called every time the node is added to the scene.
 	# Initialization here
-	pass
+	connect("pressed", self, "clicked")
+
+func clicked():
+	print("been clicked")
