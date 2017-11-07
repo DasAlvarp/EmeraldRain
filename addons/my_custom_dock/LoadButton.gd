@@ -12,5 +12,4 @@ func _ready():
 
 func _input(event):
 	if(event.type == InputEvent.MOUSE_BUTTON):
-		get_node("../ErrorMsg").set_text("hi")
 		get_node("../ItemList").generate(get_node("../Path").get_text())
