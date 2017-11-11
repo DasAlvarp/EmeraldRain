@@ -1,0 +1,15 @@
+animNum,animName,path
+0,5a1,5a1.png
+1,5a2,5a2.png
+2,5a3,5a3.png
+3,5b1,5b1.png
+4,5b2,5b2.png
+5,5b3,5b3.png
+6,temp,temp.png
+7,stand,stand.png
+8,dash,dash.png
+9,crouch,crouch.png
+10,blockCR,blockCR.png
+11,blockST,blockST.png
+12,bdash1,bdash1.png
+13,bdash2,bdash2.png
