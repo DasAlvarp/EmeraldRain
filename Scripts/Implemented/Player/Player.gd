@@ -32,9 +32,9 @@ class Player:
 	var flow
 
 
-	func _init(playerNum, controllerNum, character, skin, buttonMaps):
+	func _init(playerNum, controllerNum, character, skin, buttonMaps, sprite):
 		self.inputReader = load("res://Scripts/Implemented/Universal/InputReader.gd").InputReader.new(controllerNum, buttonMaps[0], buttonMaps[1], buttonMaps[2], buttonMaps[3], 15, playerNum != 0)#if it's not player1, it's not flipped 
-		self.character = load("res://Scripts/Implemented/Character/" + character + "/Controller.gd").Controller.new(skin, inputReader)
+		self.character = load("res://Scripts/Implemented/Character/" + character + "/Controller.gd").Controller.new(skin, inputReader, sprite)
 		self.skin = skin
 		self.maxHp = self.character.getMaxHp()
 		self.hp = maxHp
@@ -69,6 +69,7 @@ class Player:
 		state = character.getState(state, statelock, meter, resource, physics, flow)
 		if(curState != state):
 			statelock = character.getStatelock(state)
+			character.draw(0, 0, state)
 			print(state)
 		else:
 			statelock -= 1
