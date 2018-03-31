@@ -18,10 +18,11 @@ class PlayerAnimationManager:
 		
 		#preload all the things
 		for x in range(animationList.getNumRows()):
-			animations.append(load("res://Assets/Character/" + character + "/Animations/1/" + animationList.getEntry("path", x)))
+			animations.append(load("res://Assets/Character/" + character + "/Animations/" + str(skin) + "/" + animationList.getEntry("path", x)))
 			animationNumbers.append(animationList.getEntry("animNum", x))
 
-	#draw at x, y,
+
+	#draw at x, y, animation/state number:
 	func draw(x, y, desc):
 		sprite.set_texture(animations[desc]) #animationList.getEntry("animNum",desc) animationNumbers[desc]
 		#sprite.set_position(Vector2(x, y))

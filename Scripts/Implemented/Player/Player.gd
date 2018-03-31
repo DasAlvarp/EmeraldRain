@@ -2,7 +2,7 @@ class Player:
 	var character #paths to char will be generated.
 	var skin
 	var inputReader
-	
+
 	var hp
 	var maxHp
 	var xVelocity
@@ -18,20 +18,21 @@ class Player:
 	var curState
 	var state
 	var statelock
-	
+
 	var resource
-	
+
 	var meter
 	var maxMeter
-	
+
 	var friction
-	
+
 	var weight
 	var maxWeight
-	
+
 	var flow
 
 
+	#player 1 or 2, controler, character name, skin number, button map, sprite number
 	func _init(playerNum, controllerNum, character, skin, buttonMaps, sprite):
 		self.inputReader = load("res://Scripts/Implemented/Universal/InputReader.gd").InputReader.new(controllerNum, buttonMaps[0], buttonMaps[1], buttonMaps[2], buttonMaps[3], 15, playerNum != 0)#if it's not player1, it's not flipped 
 		self.character = load("res://Scripts/Implemented/Character/" + character + "/Controller.gd").Controller.new(skin, inputReader, sprite)
@@ -81,5 +82,4 @@ class Player:
 
 
 	#this is the part that the big controller would control
-	func hitPlayer(damage, hitType, hitstun, xPow, yPow):
-		hp -= damage
+	func hitPlayer(damage, hitType, hitstun, xPow, yPow):		hp -= damage
