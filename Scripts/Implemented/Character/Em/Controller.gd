@@ -63,7 +63,7 @@ class Controller:
 			var newState = inputTranslator.getGesture() 
 			if(newState > -1):
 				return newState
-	
+		
 		if(statelock > -1):
 			#calculate stuff
 			if(grounded && state > 4500):#aerial hitstun to the ground should end in a grounded state
@@ -73,6 +73,8 @@ class Controller:
 		else:
 			#go to autocancel state
 			return int(stateTable.getEntry("AutoCancel", state))
-			
+
+
+	#draw state image at position.
 	func draw(x, y, state):
 		animations.draw(x, y, state) 

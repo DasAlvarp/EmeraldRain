@@ -82,4 +82,5 @@ class Player:
 
 
 	#this is the part that the big controller would control
-	func hitPlayer(damage, hitType, hitstun, xPow, yPow):		hp -= damage
+	func hitPlayer(damage, hitType, hitstun, xPow, yPow):
+		hp -= damage

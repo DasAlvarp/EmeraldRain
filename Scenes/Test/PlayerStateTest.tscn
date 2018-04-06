@@ -36,6 +36,6 @@ max_lines_visible = -1
 
 [node name="Player" type="Sprite" parent="."]
 
-transform/pos = Vector2( 1000, 227 )
+transform/pos = Vector2( 1062, 230 )
 
 
